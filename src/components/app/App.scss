@@ -1,0 +1,24 @@
+.app {
+
+     &__container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+     }
+
+     &__main-content {
+          height: 100%;
+          width: 100%;
+          margin: 0 auto;
+          padding: 10px 20px;
+          text-align: center;
+     }
+}
+
+.main-content {
+     &__decoded-block {}
+
+     &__form-wrapper {}
+
+     &__vehicle-infolist {}
+}

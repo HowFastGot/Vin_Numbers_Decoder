@@ -1,0 +1,21 @@
+.warning-message {
+     position: absolute;
+     left: 50%;
+     bottom: -19px;
+     transform: translateX(-50%);
+     color: red;
+     font-size: 12px;
+     font-weight: 700;
+     text-align: center;
+     white-space: nowrap;
+
+     &_tooLong {
+          bottom: -25px;
+          color: green;
+          overflow: hidden;
+
+          span {
+               color: red;
+          }
+     }
+}

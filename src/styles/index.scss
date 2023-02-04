@@ -1,0 +1,13 @@
+@import "nullStyle.scss";
+//==================================================================================
+
+body {
+     background-color: rgb(120, 205, 229);
+}
+
+.container {
+     max-width: 1440px;
+     min-height: 100vh;
+     margin: 0 auto;
+     background-color: #fff;
+}

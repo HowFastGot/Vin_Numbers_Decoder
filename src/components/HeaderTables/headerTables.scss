@@ -1,0 +1,16 @@
+.header-tables {
+     padding: 5px 15px;
+     font-weight: 700;
+     font-size: 22px;
+     color: #333;
+     text-align: left;
+
+     border: 1px solid #999;
+     background-color: rgb(208, 207, 207);
+     border-radius: 5px 5px 0 0;
+
+
+     @media (max-width: 770px) {
+          text-align: center;
+     }
+}

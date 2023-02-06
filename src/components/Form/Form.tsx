@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback, ChangeEvent } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchingProcess, fetchedResults } from './../../redux/vinInfoSlice';
 import { addNewRequstedVin } from '../../redux/requestedVinSlice';
 
@@ -7,12 +7,15 @@ import { SubmitButton } from '../components-transponder';
 import { WarningMsg } from '../components-transponder';
 import { useHttp } from '../../hooks/http.hook';
 
-import { IResponseItemAPI, IResponseObjectAPI } from '../../types';
+import { IResponseItemAPI, IResponseObjectAPI, IStoreType } from '../../types';
 
 import './form.scss';
 
 export function Form() {
 	const [vinCharacter, setVinCharacter] = useState('');
+	const requestedVinArray: string[] = useSelector(
+		(state: IStoreType) => state.requestedVinReducer.vinList
+	);
 
 	const [warningMsgText, setWarningMsgText] = useState('');
 	const [messageFromAPI, setMessageFromAPI] = useState('');
@@ -24,7 +27,6 @@ export function Form() {
 	const fetchVinInfoMemorizedArray = useCallback(
 		(url: string): void => {
 			dispatch(fetchingProcess());
-
 			request(url)
 				.then((res: IResponseObjectAPI) => {
 					if ('Results' in res && Array.isArray(res.Results)) {
@@ -35,13 +37,17 @@ export function Form() {
 									!item.Variable.includes('Error')
 								);
 							});
-						setMessageFromAPI(res.Message);
-						dispatch(fetchedResults(filteredArr));
-						dispatch(
-							addNewRequstedVin(
-								res.SearchCriteria.replace(/VIN:/gi, '')
-							)
+						const requestedVIN: string = res.SearchCriteria.replace(
+							/VIN:/gi,
+							''
 						);
+
+						setMessageFromAPI(res.Message);
+
+						dispatch(fetchedResults(filteredArr));
+						dispatch(addNewRequstedVin(requestedVIN));
+
+						setVinCharacter('');
 					}
 				})
 				.catch((e: { message: string }) => {
@@ -56,6 +62,14 @@ export function Form() {
 		},
 		[dispatch, request]
 	);
+
+	const handleDoubleFetching = useCallback((): void => {
+		setMessageFromAPI('Already fetched!');
+		const timeId = setTimeout(() => {
+			setMessageFromAPI('');
+			clearTimeout(timeId);
+		}, 2000);
+	}, []);
 
 	const handleInvalidInput = (
 		target: HTMLInputElement,
@@ -119,9 +133,13 @@ export function Form() {
 				onSubmit={(e) => {
 					e.preventDefault();
 
-					fetchVinInfoMemorizedArray(
-						`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vinCharacter}?format=json`
-					);
+					if (requestedVinArray.at(-1) === vinCharacter) {
+						handleDoubleFetching();
+					} else {
+						fetchVinInfoMemorizedArray(
+							`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vinCharacter}?format=json`
+						);
+					}
 				}}
 			>
 				<div className='form__group'>
@@ -137,6 +155,7 @@ export function Form() {
 							checkValidVINCharacter(e, e.target.value?.trim());
 						}}
 						ref={inputRef}
+						autoComplete={'true'}
 					/>
 					<SubmitButton isCorrectVIN={vinCharacter.length !== 17} />
 					{inputRef.current && warningMsgText

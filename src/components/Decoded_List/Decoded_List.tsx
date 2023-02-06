@@ -1,8 +1,10 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
 
 import { HeaderTables } from '../components-transponder';
-import { IRequestedVinSlice, IStoreType } from '../../types';
+import { loadAlrdyFetchedInfo } from '../../redux/vinInfoSlice';
+
+import { IStoreType } from '../../types';
 
 import './decoded_list.scss';
 
@@ -11,7 +13,18 @@ export function DecodedList() {
 		(state: IStoreType) => state.requestedVinReducer.vinList
 	);
 
-	console.log(requestedVinArray);
+	const dispatch = useDispatch();
+
+	const handleClickOnRecentVIN = (
+		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+		vin: string
+	): void => {
+		e.preventDefault();
+
+		const indexOfVin: number = requestedVinArray.indexOf(vin);
+
+		dispatch(loadAlrdyFetchedInfo(indexOfVin));
+	};
 
 	return (
 		<section className='main-content__decoded-block decoded-block'>
@@ -20,7 +33,12 @@ export function DecodedList() {
 				{requestedVinArray.map((item) => {
 					return (
 						<li key={nanoid()} className='decoded-block__item'>
-							<a href='/'>{item}</a>
+							<a
+								href='/'
+								onClick={(e) => handleClickOnRecentVIN(e, item)}
+							>
+								{item}
+							</a>
 						</li>
 					);
 				})}

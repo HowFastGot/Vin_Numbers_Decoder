@@ -1,5 +1,3 @@
-import vinInfoReducer from '../redux/vinInfoSlice/';
-
 export interface IResponseItemAPI {
 	Value: string;
 	ValueId: string;
@@ -23,6 +21,7 @@ export interface IRequestedVinSlice {
 
 export interface IVinInfoSlice {
 	values: IResponseItemAPI[];
+	prev_values: IResponseItemAPI[][];
 	loading: boolean;
 }
 

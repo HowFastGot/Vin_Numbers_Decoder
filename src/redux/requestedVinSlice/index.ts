@@ -13,10 +13,22 @@ const requestedVinSlice = createSlice({
 		addNewRequstedVin: (state, action) => {
 			const vinList: string[] = state.vinList;
 
-			if (state.vinList.length <= 5) {
-				vinList.push(action.payload);
+			if (vinList.includes(action.payload)) return;
+
+			if (state.vinList.length <= 4) {
+				vinList.unshift(action.payload);
+			} else {
+				vinList.pop();
+				vinList.unshift(action.payload);
 			}
 		},
+		// changeOrderVin: (state, action) => {
+		// 	const requstedVin = state.vinList.splice(action.payload, 1);
+		// 	state.vinList = [
+		// 		...requstedVin,
+		// 		...state.vinList.filter((item) => item !== requstedVin[0]),
+		// 	];
+		// },
 	},
 });
 

@@ -7,4 +7,8 @@ export { ResultInfo } from '../ResultInfo/ResultInfo';
 // small components
 export { HeaderTables } from '../HeaderTables/HeaderTables';
 export { ResultSingleItem } from '../ResultSingleItem/ResultSingleItem';
-export { WarningMsg } from '../warningMsg/WarningMsg';
+export { WarningMsg } from '../WarningMsg/WarningMsg';
+export { VariableDescriptor } from '../VariableDescriptor/VariableDescriptor';
+export { SceletonLoader } from '../SceletonLoader/SceletonLoader';
+export { SceletonVariables } from '../SceletonLoader/SceletonVariables';
+export { Spinner } from '../Spinner/Spinner';

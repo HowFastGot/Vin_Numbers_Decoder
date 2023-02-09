@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { IVinInfoSlice, IResponseItemAPI } from '../../types';
 
 const initialState: IVinInfoSlice = {
@@ -31,10 +31,22 @@ const resultsSlice = createSlice({
 			}
 		},
 		loadAlrdyFetchedInfo: (state, action) => {
+			state.loading = false;
 			state.values = state.prev_values[action.payload];
 		},
 	},
 });
+
+export const vinArrayInfoLoadingSelector = createSelector(
+	[
+		(state: IVinInfoSlice) => state.values,
+		(state: IVinInfoSlice) => state.loading,
+	],
+	(values, loading) => ({
+		values,
+		loading,
+	})
+);
 
 export const { fetchingProcess, fetchedResults, loadAlrdyFetchedInfo } =
 	resultsSlice.actions;

@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchingProcess, fetchedResults } from './../../redux/vinInfoSlice';
 import { addNewRequstedVin } from '../../redux/requestedVinSlice';
 
-import { SubmitButton } from '../components-transponder';
-import { WarningMsg } from '../components-transponder';
+import { SubmitButton, WarningMsg } from '../components-transponder';
+
 import { useHttp } from '../../hooks/http.hook';
 
 import { IResponseItemAPI, IResponseObjectAPI, IStoreType } from '../../types';
@@ -27,8 +27,8 @@ export function Form() {
 	const fetchVinInfoMemorizedArray = useCallback(
 		(url: string): void => {
 			dispatch(fetchingProcess());
-			request(url)
-				.then((res: IResponseObjectAPI) => {
+			request<IResponseObjectAPI<IResponseItemAPI>>(url)
+				.then((res: IResponseObjectAPI<IResponseItemAPI>) => {
 					if ('Results' in res && Array.isArray(res.Results)) {
 						const filteredArr: IResponseItemAPI[] =
 							res.Results.filter((item) => {

@@ -1,24 +1,37 @@
+import { createBrowserRouter, RouterProvider, Link } from 'react-router-dom';
+
+import { Footer } from '../components-transponder';
 import {
-	DecodedList,
-	Footer,
-	Form,
-	ResultInfo,
-} from '../components-transponder';
+	MainPage,
+	VariablesInfoList,
+	SingleVariableDescription,
+} from '../pages';
 
 import './App.scss';
 
+const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <MainPage />,
+		errorElement: <div>Error</div>,
+	},
+	{
+		path: 'variables',
+		element: <VariablesInfoList />,
+	},
+	{
+		path: 'variables/:id',
+		element: <SingleVariableDescription />,
+	},
+]);
 function App() {
 	return (
-		<div className='app'>
+		<main className='app'>
 			<div className='app__container container'>
-				<main className='app__main-content main-content'>
-					<Form />
-					<ResultInfo />
-					<DecodedList />
-				</main>
+				<RouterProvider router={router} />
 				<Footer />
 			</div>
-		</div>
+		</main>
 	);
 }
 

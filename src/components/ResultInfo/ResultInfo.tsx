@@ -2,26 +2,26 @@ import { useSelector } from 'react-redux';
 import { IResponseItemAPI, IStoreType } from '../../types';
 
 import { HeaderTables, ResultSingleItem } from '../components-transponder';
+
+import { vinArrayInfoLoadingSelector } from '../../redux/vinInfoSlice';
+import setContent from '../../utils/setContent';
+
 import './resultInfo.scss';
 
+interface IVinItemsReducerSelector {
+	values: IResponseItemAPI[];
+	loading: boolean;
+}
 export function ResultInfo() {
-	const resultVinInfoArray: IResponseItemAPI[] = useSelector(
-		(state: IStoreType) => state.vinInfoReducer.values
+	const { values, loading }: IVinItemsReducerSelector = useSelector(
+		(state: IStoreType) => vinArrayInfoLoadingSelector(state.vinInfoReducer)
 	);
 
 	return (
 		<section className='main-content__vehicle-infolist vehicle-infolist'>
 			<HeaderTables headerText='Vehicle information' />
 			<ul className='vehicle-infolist__table-list'>
-				{resultVinInfoArray.map((item, index) => {
-					return (
-						<ResultSingleItem
-							key={index}
-							variable={item.Variable}
-							value={item.Value}
-						/>
-					);
-				})}
+				{setContent('main-page', loading, ResultSingleItem, values)}
 			</ul>
 		</section>
 	);

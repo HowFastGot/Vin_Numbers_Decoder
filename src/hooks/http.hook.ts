@@ -1,16 +1,15 @@
 import { useCallback } from 'react';
-import { IResponseObjectAPI } from '../types';
 
 export const useHttp = () => {
 	const request = useCallback(
-		async (
+		async <T>(
 			url: string,
 			method: 'GET' | 'POST' = 'GET',
 			body: null | string = null,
 			headers: Partial<{ 'Content-Type': string }> = {
 				'Content-Type': 'application/json',
 			}
-		): Promise<IResponseObjectAPI> => {
+		): Promise<T> => {
 			try {
 				const response = await fetch(url, { method, body, headers });
 
@@ -20,7 +19,7 @@ export const useHttp = () => {
 					);
 				}
 
-				const data = await response.json();
+				const data: T = await response.json();
 
 				return data;
 			} catch (e) {

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
 	VariableDescriptor,
 	SceletonVariables,
+	Header,
 } from '../../components-transponder';
 
 import {
@@ -30,8 +31,6 @@ export function VariablesInfoList() {
 
 	const { request } = useHttp();
 	const dispatch = useDispatch();
-
-	console.log(loading);
 
 	const handleInsertingHTML = (data: Required<IDecriptionVariables[]>) => {
 		if (loading) {
@@ -73,8 +72,11 @@ export function VariablesInfoList() {
 	}, [request, dispatch]);
 
 	return (
-		<div className='app__variables-info variables-info '>
-			{handleInsertingHTML(variableInfoArray)}
-		</div>
+		<>
+			<Header />
+			<div className='app__variables-info variables-info '>
+				{handleInsertingHTML(variableInfoArray)}
+			</div>
+		</>
 	);
 }

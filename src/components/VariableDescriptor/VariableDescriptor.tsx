@@ -20,7 +20,9 @@ export function VariableDescriptor({
 				</li>
 			</ul>
 			<ul className='var-item__desc-column'>
-				<li className='var-item__desc-item'>{Description}</li>
+				<li className='var-item__desc-item'>
+					{Description.replace(/[</p>]/gi, ' ')}
+				</li>
 			</ul>
 		</div>
 	);

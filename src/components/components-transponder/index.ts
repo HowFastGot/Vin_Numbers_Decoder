@@ -1,5 +1,6 @@
 export { SubmitButton } from '../SubmitButton/SubmitButton';
 export { Form } from '../Form/Form';
+export { Header } from '../Header/Header';
 export { Footer } from '../Footer/Footer';
 export { DecodedList } from '../Decoded_List/Decoded_List';
 export { ResultInfo } from '../ResultInfo/ResultInfo';

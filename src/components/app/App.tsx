@@ -13,14 +13,14 @@ const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <MainPage />,
-		errorElement: <div>Error</div>,
+		errorElement: <div>Error Page</div>,
 	},
 	{
-		path: 'variables',
+		path: '/variables',
 		element: <VariablesInfoList />,
 	},
 	{
-		path: 'variables/:id',
+		path: '/variables/:id',
 		element: <SingleVariableDescription />,
 	},
 ]);

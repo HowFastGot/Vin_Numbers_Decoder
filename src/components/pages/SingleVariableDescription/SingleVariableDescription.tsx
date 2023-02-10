@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
-import { useParams, redirect } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-import { VariableDescriptor } from '../../components-transponder';
+import { Header, VariableDescriptor } from '../../components-transponder';
 
 import { IStoreType, IDecriptionVariables } from '../../../types/';
 
@@ -31,14 +31,17 @@ export function SingleVariableDescription() {
 
 	if (neededVariableItem) {
 		return (
-			<section className='app__single-variable-page single-variable-page'>
-				<div className='single-variable-page__wrapper'>
-					<VariableDescriptor
-						customId={neededVariableItem.ID}
-						{...neededVariableItem}
-					/>
-				</div>
-			</section>
+			<>
+				<Header />
+				<section className='app__single-variable-page single-variable-page'>
+					<div className='single-variable-page__wrapper'>
+						<VariableDescriptor
+							customId={neededVariableItem.ID}
+							{...neededVariableItem}
+						/>
+					</div>
+				</section>
+			</>
 		);
 	} else {
 		return <div>Error page</div>;

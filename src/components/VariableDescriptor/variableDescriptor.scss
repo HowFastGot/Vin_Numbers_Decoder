@@ -1,9 +1,8 @@
 .var-item {
      display: grid;
-     grid-template-columns: 200px 1fr;
+     gap: 10px 0px;
      align-items: center;
      padding-bottom: 20px;
-     gap: 10px;
 
      &__name-column {
           font-size: 16px;
@@ -13,6 +12,12 @@
           a {
                color: inherit;
           }
+
+          @media (max-width: 550px) {
+               text-align: center;
+          }
+
+          ;
      }
 
      &__name-item {}
@@ -22,4 +27,10 @@
      }
 
      &__desc-item {}
+
+     @media (min-width: 550px) {
+          grid-template-columns: 200px 1fr;
+          gap: 10px;
+     }
+
 }

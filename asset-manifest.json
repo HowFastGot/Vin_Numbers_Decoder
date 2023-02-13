@@ -8,7 +8,7 @@
 		"main.875ba7ed.js.map": "static/js/main.875ba7ed.js.map"
 	},
 	"entrypoints": [
-		"static/css/main.e41fba96.css",
-		"static/js/main.875ba7ed.js"
+		"vinNumberCheck/static/css/main.e41fba96.css",
+		"vinNumberCheck/static/js/main.875ba7ed.js"
 	]
 }

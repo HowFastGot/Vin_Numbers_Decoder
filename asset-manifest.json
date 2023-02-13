@@ -1,14 +1,14 @@
 {
-  "files": {
-    "main.css": "/static/css/main.e41fba96.css",
-    "main.js": "/static/js/main.875ba7ed.js",
-    "static/media/logo.png": "/static/media/logo.41173963466690779034.png",
-    "index.html": "/index.html",
-    "main.e41fba96.css.map": "/static/css/main.e41fba96.css.map",
-    "main.875ba7ed.js.map": "/static/js/main.875ba7ed.js.map"
-  },
-  "entrypoints": [
-    "static/css/main.e41fba96.css",
-    "static/js/main.875ba7ed.js"
-  ]
+	"files": {
+		"main.css": "/static/css/main.e41fba96.css",
+		"main.js": "/static/js/main.875ba7ed.js",
+		"static/media/logo.png": "/static/media/logo.41173963466690779034.png",
+		"index.html": "/index.html",
+		"main.e41fba96.css.map": "/static/css/main.e41fba96.css.map",
+		"main.875ba7ed.js.map": "/static/js/main.875ba7ed.js.map"
+	},
+	"entrypoints": [
+		"vinNumberCheck/static/css/main.e41fba96.css",
+		"vinNumberCheck/static/js/main.875ba7ed.js"
+	]
 }

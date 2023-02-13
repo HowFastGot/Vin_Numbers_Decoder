@@ -2,7 +2,7 @@
 	"files": {
 		"main.css": "/vinnumbercheck/static/css/main.eaf86e8a.css",
 		"main.js": "/vinnumbercheck/static/js/main.c9171b7c.js",
-		"static/media/logo.png": "/vinnumbercheck/vinnumbercheck/static/media/logo.41173963466690779034.png",
+		"static/media/logo.png": "static/media/logo.41173963466690779034.png",
 		"index.html": "/index.html",
 		"main.eaf86e8a.css.map": "/vinnumbercheck/static/css/main.eaf86e8a.css.map",
 		"main.c9171b7c.js.map": "/vinnumbercheck/static/js/main.c9171b7c.js.map"

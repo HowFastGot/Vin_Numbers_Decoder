@@ -1,14 +1,14 @@
 {
-	"files": {
-		"main.css": "vinNumberCheck/static/css/main.e41fba96.css",
-		"main.js": "vinNumberCheck/static/js/main.875ba7ed.js",
-		"static/media/logo.png": "vinNumberCheck/static/media/logo.41173963466690779034.png",
-		"index.html": "vinNumberCheck/index.html",
-		"main.e41fba96.css.map": "vinNumberCheck/static/css/main.e41fba96.css.map",
-		"main.875ba7ed.js.map": "vinNumberCheck/static/js/main.875ba7ed.js.map"
-	},
-	"entrypoints": [
-		"vinNumberCheck/static/css/main.e41fba96.css",
-		"vinNumberCheck/static/js/main.875ba7ed.js"
-	]
+  "files": {
+    "main.css": "/static/css/main.eaf86e8a.css",
+    "main.js": "/static/js/main.c9171b7c.js",
+    "static/media/logo.png": "/static/media/logo.41173963466690779034.png",
+    "index.html": "/index.html",
+    "main.eaf86e8a.css.map": "/static/css/main.eaf86e8a.css.map",
+    "main.c9171b7c.js.map": "/static/js/main.c9171b7c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eaf86e8a.css",
+    "static/js/main.c9171b7c.js"
+  ]
 }

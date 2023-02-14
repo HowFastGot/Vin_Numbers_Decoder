@@ -1,48 +1,38 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 
-import { HeaderTables } from '../components-transponder';
-import { loadAlrdyFetchedInfo } from '../../redux/vinInfoSlice';
+import { HeaderTables, DecodedVinItem } from '../components-transponder';
 
 import { IStoreType } from '../../types';
 
 import './decoded_list.scss';
 
 export function DecodedList() {
-	const requestedVinArray: string[] = useSelector(
-		(state: IStoreType) => state.requestedVinReducer.vinList
+	const { vinList, loading } = useSelector(
+		(state: IStoreType) => state.requestedVinReducer
 	);
 
-	const dispatch = useDispatch();
-
-	const handleClickOnRecentVIN = (
-		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-		vin: string
-	): void => {
-		e.preventDefault();
-
-		const indexOfVin: number = requestedVinArray.indexOf(vin);
-
-		dispatch(loadAlrdyFetchedInfo(indexOfVin));
-	};
+	const content =
+		loading !== 'initial' ? (
+			vinList.map((vin, id) => {
+				return (
+					<DecodedVinItem
+						key={nanoid()}
+						decodedVin={vin}
+						indexInVinArr={id}
+					/>
+				);
+			})
+		) : (
+			<div className='decoded-block__initial-content'>
+				Decoded vin numbers will be placed here!
+			</div>
+		);
 
 	return (
 		<section className='main-content__decoded-block decoded-block'>
 			<HeaderTables headerText='Recently checked' />
-			<nav className='decoded-block__list'>
-				{requestedVinArray.map((item) => {
-					return (
-						<li key={nanoid()} className='decoded-block__item'>
-							<a
-								href='/'
-								onClick={(e) => handleClickOnRecentVIN(e, item)}
-							>
-								{item}
-							</a>
-						</li>
-					);
-				})}
-			</nav>
+			<nav className='decoded-block__list'>{content}</nav>
 		</section>
 	);
 }

@@ -29,13 +29,13 @@ export interface IDecriptionVariables {
 
 export interface IRequestedVinSlice {
 	vinList: string[];
-	isFirstLoaded: boolean;
+	loading: boolean | 'initial';
 }
 
 export interface IVinInfoSlice {
 	values: IResponseItemAPI[];
 	prev_values: IResponseItemAPI[][];
-	loading: boolean;
+	loading: boolean | 'initial';
 }
 
 export interface IVariablesSlice {

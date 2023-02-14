@@ -9,9 +9,18 @@ body {
      height: 100%;
 }
 
+.error-page {
+     line-height: 100vh;
+     width: 100%;
+     background-color: red;
+     color: white;
+     font-size: 30px;
+     font-weight: 800;
+}
+
 .container {
      max-width: 1440px;
-     height: 100vh;
+     min-height: 100vh;
      min-height: 500px;
      margin: 0 auto;
      background-color: #fff;

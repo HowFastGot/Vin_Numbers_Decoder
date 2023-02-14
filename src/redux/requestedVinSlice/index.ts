@@ -4,13 +4,14 @@ import { IRequestedVinSlice } from '../../types';
 
 const initialState: IRequestedVinSlice = {
 	vinList: [],
-	isFirstLoaded: false,
+	loading: 'initial',
 };
 const requestedVinSlice = createSlice({
 	name: 'five-vin-list',
 	initialState,
 	reducers: {
 		addNewRequstedVin: (state, action) => {
+			state.loading = false;
 			const vinList: string[] = state.vinList;
 
 			if (vinList.includes(action.payload)) return;

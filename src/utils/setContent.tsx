@@ -3,29 +3,32 @@ import { nanoid } from 'nanoid';
 import { IResponseItemAPI } from '../types';
 
 function setContent(
-	page: string,
-	loading: boolean,
+	loading: boolean | 'initial',
 	Component: React.ElementType,
 	data: IResponseItemAPI[]
 ) {
-	if (page === 'main-page') {
-		switch (loading) {
-			case false:
-				return data.map((item, id) => {
-					return (
-						<Component
-							key={nanoid()}
-							variable={item.Variable}
-							value={item.Value}
-						/>
-					);
-				});
-			case true:
-				return <SceletonLoader />;
+	switch (loading) {
+		case 'initial':
+			return (
+				<div className='vehicle-infolist__initial-content'>
+					Vin`s information will be placed here
+				</div>
+			);
+		case false:
+			return data.map((item) => {
+				return (
+					<Component
+						key={nanoid()}
+						variable={item.Variable}
+						value={item.Value}
+					/>
+				);
+			});
+		case true:
+			return <SceletonLoader />;
 
-			default:
-				throw new Error("Can't search procces in swtich");
-		}
+		default:
+			throw new Error("Can't search procces in swtich");
 	}
 }
 

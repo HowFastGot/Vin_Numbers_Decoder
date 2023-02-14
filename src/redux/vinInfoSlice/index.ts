@@ -4,7 +4,7 @@ import { IVinInfoSlice, IResponseItemAPI } from '../../types';
 const initialState: IVinInfoSlice = {
 	values: [],
 	prev_values: [],
-	loading: false,
+	loading: 'initial',
 };
 
 interface IAction {

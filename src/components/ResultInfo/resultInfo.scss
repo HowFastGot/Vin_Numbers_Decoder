@@ -1,4 +1,18 @@
 .vehicle-infolist {
+     &__initial-content {
+          display: inline-block;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+
+          white-space: nowrap;
+          color: #999;
+
+
+          @media (min-width: 500px) {
+               font-size: 22px;
+          }
+     }
 
      &__table-list {
           display: grid;

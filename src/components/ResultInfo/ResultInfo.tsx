@@ -10,7 +10,7 @@ import './resultInfo.scss';
 
 interface IVinItemsReducerSelector {
 	values: IResponseItemAPI[];
-	loading: boolean;
+	loading: boolean | 'initial';
 }
 export function ResultInfo() {
 	const { values, loading }: IVinItemsReducerSelector = useSelector(
@@ -21,7 +21,7 @@ export function ResultInfo() {
 		<section className='main-content__vehicle-infolist vehicle-infolist'>
 			<HeaderTables headerText='Vehicle information' />
 			<ul className='vehicle-infolist__table-list'>
-				{setContent('main-page', loading, ResultSingleItem, values)}
+				{setContent(loading, ResultSingleItem, values)}
 			</ul>
 		</section>
 	);

@@ -8,6 +8,7 @@ export { ResultInfo } from '../ResultInfo/ResultInfo';
 // small components
 export { HeaderTables } from '../HeaderTables/HeaderTables';
 export { ResultSingleItem } from '../ResultSingleItem/ResultSingleItem';
+export { DecodedVinItem } from '../DecodedVinItem/DecodedVinItem';
 export { WarningMsg } from '../WarningMsg/WarningMsg';
 export { VariableDescriptor } from '../VariableDescriptor/VariableDescriptor';
 export { SceletonLoader } from '../SceletonLoader/SceletonLoader';

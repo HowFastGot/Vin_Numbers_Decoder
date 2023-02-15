@@ -1,29 +1,49 @@
-import { createBrowserRouter, RouterProvider, Link } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { Footer } from '../components-transponder';
 import {
-	MainPage,
-	VariablesInfoList,
-	SingleVariableDescription,
-} from '../pages';
+	Footer,
+	ErrorMessage,
+	SceletonLoader,
+} from '../components-transponder';
 
 import './App.scss';
+
+const MainPage = lazy(() => import('../pages/Main-page/MainPage'));
+const VariablesInfoList = lazy(
+	() => import('../pages/VariablesInfoList/VariablesInfoList')
+);
+const SingleVariableDescription = lazy(
+	() => import('../pages/SingleVariableDescription/SingleVariableDescription')
+);
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <MainPage />,
-		errorElement: <div className='error-page'>Error Page</div>,
+		element: (
+			<Suspense fallback={<SceletonLoader />}>
+				<MainPage />
+			</Suspense>
+		),
 	},
 	{
 		path: '/variables/',
-		element: <VariablesInfoList />,
+		element: (
+			<Suspense fallback={<SceletonLoader />}>
+				<VariablesInfoList />
+			</Suspense>
+		),
 	},
 	{
 		path: '/variables/:id/',
-		element: <SingleVariableDescription />,
+		element: (
+			<Suspense fallback={<SceletonLoader />}>
+				<SingleVariableDescription />
+			</Suspense>
+		),
 	},
 ]);
+
 function App() {
 	return (
 		<main className='app'>

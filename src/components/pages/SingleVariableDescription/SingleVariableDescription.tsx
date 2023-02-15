@@ -1,7 +1,11 @@
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { Header, VariableDescriptor } from '../../components-transponder';
+import {
+	Header,
+	VariableDescriptor,
+	ErrorBoundary,
+} from '../../components-transponder';
 
 import { IStoreType, IDecriptionVariables } from '../../../types/';
 
@@ -12,7 +16,7 @@ interface IParamsURL {
 }
 type NeededVarObjectType = IDecriptionVariables | undefined;
 
-export function SingleVariableDescription() {
+function SingleVariableDescription() {
 	const allVariablesArray: IDecriptionVariables[] = useSelector(
 		(state: IStoreType) => state.variablesInfoReducer.dataArray
 	);
@@ -35,10 +39,12 @@ export function SingleVariableDescription() {
 				<Header />
 				<section className='app__single-variable-page single-variable-page'>
 					<div className='single-variable-page__wrapper'>
-						<VariableDescriptor
-							customId={neededVariableItem.ID}
-							{...neededVariableItem}
-						/>
+						<ErrorBoundary>
+							<VariableDescriptor
+								customId={neededVariableItem.ID}
+								{...neededVariableItem}
+							/>
+						</ErrorBoundary>
 					</div>
 				</section>
 			</>
@@ -47,3 +53,5 @@ export function SingleVariableDescription() {
 		return <div>Error page</div>;
 	}
 }
+
+export default SingleVariableDescription;

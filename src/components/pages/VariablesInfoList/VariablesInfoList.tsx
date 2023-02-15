@@ -1,17 +1,22 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useHttp } from '../../../hooks/http.hook';
+
 import {
 	VariableDescriptor,
 	SceletonVariables,
 	Header,
+	ErrorBoundary,
+	ErrorMessage,
 } from '../../components-transponder';
 
 import {
 	addFetchedInfo,
 	fetchingVariablesDescription,
+	handleErrorFetching,
+	vinArrayInfoLoadingSelector,
 } from '../../../redux/VariablesInfoSlice';
-import { useHttp } from '../../../hooks/http.hook';
 
 import {
 	IResponseVariablesAPI,
@@ -19,21 +24,21 @@ import {
 	IDecriptionVariables,
 	IStoreType,
 } from '../../../types';
+
 import './variablesInfoList.scss';
 
-export function VariablesInfoList() {
-	const variableInfoArray: IDecriptionVariables[] = useSelector(
-		(state: IStoreType) => state.variablesInfoReducer.dataArray
-	);
-	const loading: boolean = useSelector(
-		(state: IStoreType) => state.variablesInfoReducer.loading
-	);
+function VariablesInfoList() {
+	const { loading, dataArray, error } = useSelector((state: IStoreType) => {
+		return vinArrayInfoLoadingSelector(state.variablesInfoReducer);
+	});
 
 	const { request } = useHttp();
 	const dispatch = useDispatch();
 
 	const handleInsertingHTML = (data: Required<IDecriptionVariables[]>) => {
-		if (loading) {
+		if (error) {
+			return <ErrorMessage />;
+		} else if (loading) {
 			return <SceletonVariables />;
 		} else {
 			return data.map((variableInfoObj) => {
@@ -67,7 +72,7 @@ export function VariablesInfoList() {
 				}
 			})
 			.catch((e) => {
-				console.log(e);
+				dispatch(handleErrorFetching());
 			});
 	}, [request, dispatch]);
 
@@ -75,8 +80,10 @@ export function VariablesInfoList() {
 		<>
 			<Header />
 			<div className='app__variables-info variables-info '>
-				{handleInsertingHTML(variableInfoArray)}
+				<ErrorBoundary>{handleInsertingHTML(dataArray)}</ErrorBoundary>
 			</div>
 		</>
 	);
 }
+
+export default VariablesInfoList;

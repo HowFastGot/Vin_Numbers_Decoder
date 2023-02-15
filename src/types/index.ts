@@ -42,6 +42,7 @@ export interface IVariablesSlice {
 	dataArray: IDecriptionVariables[];
 	singleVar: Partial<IDecriptionVariables>;
 	loading: boolean;
+	error: boolean;
 }
 
 //====Reducers==============================================================================

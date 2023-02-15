@@ -1,15 +1,27 @@
-import { useState, useEffect, useRef, useCallback, ChangeEvent } from 'react';
+import {
+	useState,
+	useEffect,
+	useRef,
+	useCallback,
+	ChangeEvent,
+	FormEvent,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchingProcess, fetchedResults } from './../../redux/vinInfoSlice';
 import { addNewRequstedVin } from '../../redux/requestedVinSlice';
 
 import { SubmitButton, WarningMsg } from '../components-transponder';
-
 import { useHttp } from '../../hooks/http.hook';
-
 import { IResponseItemAPI, IResponseObjectAPI, IStoreType } from '../../types';
 
 import './form.scss';
+
+type InputRefType = { current: HTMLInputElement };
+interface ITips {
+	inputElem: HTMLInputElement;
+	warningMsgText: string;
+	messageFromAPI: string;
+}
 
 export function Form() {
 	const [vinCharacter, setVinCharacter] = useState('');
@@ -17,10 +29,11 @@ export function Form() {
 		(state: IStoreType) => state.requestedVinReducer.vinList
 	);
 
+	// локальное состояние
 	const [warningMsgText, setWarningMsgText] = useState('');
 	const [messageFromAPI, setMessageFromAPI] = useState('');
 
-	const inputRef = useRef() as { current: HTMLInputElement };
+	const inputRef = useRef() as InputRefType;
 	const { request } = useHttp();
 	const dispatch = useDispatch();
 
@@ -73,7 +86,7 @@ export function Form() {
 
 	const handleInvalidInput = (
 		target: HTMLInputElement,
-		char: string
+		warningMsgText: string
 	): JSX.Element => {
 		target.style.cssText = `
                     border: 1px solid red;
@@ -114,6 +127,35 @@ export function Form() {
 		}
 	};
 
+	const handleSubmitForm = (
+		e: FormEvent,
+		requestedVinArray: string[],
+		vinCharacter: string
+	) => {
+		e.preventDefault();
+
+		if (requestedVinArray.at(-1) === vinCharacter) {
+			handleDoubleFetching();
+		} else {
+			fetchVinInfoMemorizedArray(
+				`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vinCharacter}?format=json`
+			);
+		}
+	};
+
+	const showFormSubmitTips = ({
+		inputElem,
+		warningMsgText,
+		messageFromAPI,
+	}: Partial<ITips>) => {
+		if (messageFromAPI) {
+			return <WarningMsg message={messageFromAPI} />;
+		}
+		if (inputElem && warningMsgText) {
+			return handleInvalidInput(inputElem, warningMsgText);
+		}
+	};
+
 	useEffect(() => {
 		inputRef.current.focus();
 	}, []);
@@ -130,17 +172,9 @@ export function Form() {
 				action='/'
 				method='post'
 				className='form'
-				onSubmit={(e) => {
-					e.preventDefault();
-
-					if (requestedVinArray.at(-1) === vinCharacter) {
-						handleDoubleFetching();
-					} else {
-						fetchVinInfoMemorizedArray(
-							`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vinCharacter}?format=json`
-						);
-					}
-				}}
+				onSubmit={(e: FormEvent) =>
+					handleSubmitForm(e, requestedVinArray, vinCharacter)
+				}
 			>
 				<div className='form__group'>
 					<input
@@ -158,12 +192,11 @@ export function Form() {
 						autoComplete={'true'}
 					/>
 					<SubmitButton isCorrectVIN={vinCharacter.length !== 17} />
-					{inputRef.current && warningMsgText
-						? handleInvalidInput(inputRef.current, vinCharacter)
-						: null}
-					{messageFromAPI ? (
-						<WarningMsg message={messageFromAPI} />
-					) : null}
+					{showFormSubmitTips({
+						inputElem: inputRef.current,
+						warningMsgText,
+						messageFromAPI,
+					})}
 				</div>
 			</form>
 		</section>

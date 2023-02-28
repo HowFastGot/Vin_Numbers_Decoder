@@ -1,6 +1,6 @@
-import { SceletonLoader } from '../components/components-transponder';
+import { SceletonLoader } from '../../components/components-transponder';
 import { nanoid } from 'nanoid';
-import { IResponseItemAPI } from '../types';
+import { IResponseItemAPI } from '../../types';
 
 function setContent(
 	loading: boolean | 'initial',

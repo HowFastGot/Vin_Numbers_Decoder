@@ -24,9 +24,25 @@
 
      &__desc-column {
           color: #474646;
+
+          ul {
+               margin: 10px 0;
+
+               li {
+                    margin-left: 20px;
+                    list-style: circle;
+               }
+          }
+
      }
 
-     &__desc-item {}
+     &__desc-item {
+          line-height: 20px;
+
+          p {
+               margin-top: 10px;
+          }
+     }
 
      @media (min-width: 550px) {
           grid-template-columns: 200px 1fr;

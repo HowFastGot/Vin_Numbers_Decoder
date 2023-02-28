@@ -1,11 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import {
-	Footer,
-	ErrorMessage,
-	SceletonLoader,
-} from '../components-transponder';
+import { Footer, SceletonLoader } from '../components-transponder';
 
 import './App.scss';
 

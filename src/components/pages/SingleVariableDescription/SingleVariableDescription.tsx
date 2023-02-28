@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useOwnRedirectHook } from '../../../hooks/useOwnRedirectHook';
 
 import {
 	Header,
@@ -22,6 +23,8 @@ function SingleVariableDescription() {
 	);
 
 	let { id }: IParamsURL = useParams();
+
+	useOwnRedirectHook(allVariablesArray);
 
 	const neededVariableItem: NeededVarObjectType = allVariablesArray.find(
 		({ ID }: IDecriptionVariables): boolean => {

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { createMarkup } from '../../utils';
 
 import './variableDescriptor.scss';
 
@@ -20,9 +21,10 @@ export function VariableDescriptor({
 				</li>
 			</ul>
 			<ul className='var-item__desc-column'>
-				<li className='var-item__desc-item'>
-					{Description.replace(/[</p>]/gi, ' ')}
-				</li>
+				<li
+					className='var-item__desc-item'
+					dangerouslySetInnerHTML={createMarkup(Description)}
+				/>
 			</ul>
 		</div>
 	);

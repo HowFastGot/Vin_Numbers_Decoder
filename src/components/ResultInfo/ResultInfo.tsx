@@ -4,7 +4,7 @@ import { IResponseItemAPI, IStoreType } from '../../types';
 import { HeaderTables, ResultSingleItem } from '../components-transponder';
 
 import { vinArrayInfoLoadingSelector } from '../../redux/vinInfoSlice';
-import setContent from '../../utils/setContent';
+import setContent from '../../utils/setContent/setContent';
 
 import './resultInfo.scss';
 

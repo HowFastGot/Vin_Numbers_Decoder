@@ -20,9 +20,21 @@
                &__desc-column {
                     margin-top: 50px;
                     padding: 0px 20px 0px 20px;
-                    font-size: 25px;
-                    line-height: 1.5em;
+                    font-size: 15px;
+                    line-height: 2.5em;
                     color: green;
+
+                    p {
+                         margin-top: 30px;
+                         line-height: 1.5em;
+                         color: #000
+                    }
+
+                    ul>li {
+                         list-style: none;
+                         text-align-last: left;
+                         margin-bottom: 10px;
+                    }
                }
           }
      }

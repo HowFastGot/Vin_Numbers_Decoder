@@ -60,13 +60,7 @@ function VariablesInfoList() {
 		)
 			.then((res) => {
 				if (res.Message.includes('successfully')) {
-					const resultFetching: IDecriptionVariables[] = [];
-
-					res.Results.forEach(({ Description, Name, ID }) => {
-						resultFetching.push({ Description, Name, ID });
-					});
-
-					dispatch(addFetchedInfo(resultFetching));
+					dispatch(addFetchedInfo(res.Results));
 				} else {
 					throw new Error('Failur with fetching!');
 				}
